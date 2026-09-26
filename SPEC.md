@@ -41,7 +41,7 @@ The primary experience is a tilted, third-person, avatar-centered 3D map. This i
 
 - Roughly one in four Cells contains a discoverable Anomaly. Its presence is revealed when the player discovers the Cell, not while it remains unexplored.
 - An Anomaly has one challenge and three player-facing states: **available**, **in progress**, and **completed**. A failed or interrupted attempt returns it to available; a completed Anomaly cannot award its reward again.
-- In an eligible scenic Cell, the Anomaly offers a photography challenge. Otherwise it offers a shape-walking challenge. A photography challenge that is inaccessible, unsafe, or cannot be verified must have a non-photography fallback; it must not permanently strand the player's reward.
+- An Anomaly near a curated landmark offers a photography challenge; elsewhere it offers a shape-walking challenge.
 - Anomalies are assigned consistently so revisiting a Cell does not reroll its challenge or rewards.
 
 ### XP
@@ -55,32 +55,23 @@ The primary experience is a tilted, third-person, avatar-centered 3D map. This i
 
 ### Photography
 
-1. A scenic Anomaly presents a specific, observable subject and clear instructions (for example, “Photograph the old lighthouse”).
+1. A photography Anomaly names a curated landmark to photograph (for example, “Photograph the old lighthouse”).
 2. The player takes a photo in the game within 100 m of an approved public viewpoint.
 3. The photo passes if its capture time and location are valid and the requested subject is visible. Uncertain matches can be retried.
 4. On success, the player receives bonus XP and a Map Fragment; the photo and challenge result appear in the Journal.
-5. On failure, the player receives a useful reason and can retry or choose the fallback where available. An uncertain AI result must not be presented as a confident rejection.
+5. On failure, the player can retry.
 
 ### Shape walking
 
-1. A non-scenic Anomaly asks the player to walk an approximate **triangle** or **square** in its Cell.
+1. A shape-walking Anomaly asks the player to walk an approximate **triangle** or **square** in its Cell.
 2. The game shows the target shape, starts recording when the player chooses **Start**, and renders their route on the map.
 3. On **Finish**, accept a route of at least 200 m that ends within 40 m of its start, with three or four clear turns and sides no more than twice as long as each other. Allow for GPS noise and detours.
 4. On success, the player receives bonus XP and a Map Fragment; a simplified route sketch and result appear in the Journal.
-5. An interruption can pause or end the attempt without losing previously earned rewards. Unreliable tracking produces an inconclusive attempt rather than a false failure.
+5. On failure, the player can retry.
 
-## 5. Scenic-place selection
+## 5. Landmark catalog
 
-Journeyveil does **not** manually inspect every Cell or classify every location as scenic.
-
-- Gather candidate subjects from geographic sources such as OpenStreetMap and Wikidata: monuments, landmarks, viewpoints, notable natural features, and similar places.
-- Rank candidates by subject type, documented significance, available evidence (including geotagged imagery where licensing allows), public accessibility, and confidence in location and identity.
-- Generate a specific photography prompt only above a conservative confidence threshold. A missing or low-confidence candidate produces a shape-walking Anomaly instead.
-- Check that the player can reach an eligible public position; a POI coordinate alone does not guarantee visibility, access, or safety.
-- Provide player reports for missing subjects, inaccessible locations, inaccurate prompts, and unsafe routes. Use reports and challenge outcomes to retire bad prompts and prioritize human review of popular candidates.
-- Curate or review the much smaller global set of **featured puzzle landmarks**. Automated scenic scoring is a candidate generator, not a guarantee that a landmark is worth featuring.
-
-Location data coverage and access rules vary by region. Use shape-walking challenges where reliable photography prompts are unavailable.
+Maintain a curated global set of landmarks for photography challenges and collectible pictures. Each photography landmark has an approved public viewpoint.
 
 ## 6. Map Fragments and landmark pictures
 
@@ -90,8 +81,6 @@ Location data coverage and access rules vary by region. Use shape-walking challe
 - Completing the puzzle reveals the landmark's name and location. The completed picture remains available in the Journal.
 - Fragment awards must advance a puzzle rather than become unusable duplicates. Once a puzzle is complete, subsequent awards advance another available puzzle; if the catalog is exhausted, the game must offer a defined alternative reward before enabling more Anomalies.
 - Featured landmarks must be verified as real and suitable to show publicly. A reveal is not a navigation instruction or assurance of current access.
-
-**Catalog decision before launch:** provide enough reviewed landmark pictures to sustain expected Anomaly completions, or define the alternative reward when the catalog is exhausted.
 
 ## 7. Journal and interface
 
@@ -116,27 +105,17 @@ Location data coverage and access rules vary by region. Use shape-walking challe
 
 ## 8. Location, privacy, and reliability
 
-- Request location permission with a plain-language explanation of why exploration needs it. Request background location only when the player opts into background exploration.
+- Request location permission with a plain-language explanation of why exploration needs it. Request background location if the player also opts into background exploration.
 - On Android, background exploration uses an ongoing foreground location service with a persistent notification and an obvious stop control. The game must handle denied or revoked permissions, disabled location, process restarts, and battery restrictions.
 - If tracking pauses, show that state clearly. Do not invent walked Cells, route segments, or challenge progress for a period without trustworthy readings.
 - Batch and deduplicate discoveries when connectivity returns. A completed action must not grant XP or fragments twice.
 - Minimize battery usage by adapting location sampling to movement and challenge state rather than continuously requesting maximum-accuracy GPS.
-- Location history and photos are sensitive. Specify what stays on-device, what is uploaded for validation/sync, retention periods, deletion, and consent **before implementation**. Do not expose precise personal routes in public features.
-- Apply basic spoofing and abuse controls without treating legitimate GPS uncertainty as cheating.
 
-## 9. MVP acceptance criteria
+## 9. MVP
 
 1. A new account sees unexplored Cells; a valid outdoor walk reveals them and awards discovery XP once each.
 2. With background exploration enabled, Android continues recording eligible discoveries while the game is not foregrounded, displays a persistent notification, and stops when the player chooses Stop.
 3. Discovering an Anomaly reveals the appropriate challenge. A successful photo or shape awards bonus XP and one fragment exactly once.
-4. A low-confidence scenic location does not receive an invented photography prompt. A bad or unsafe prompt can be reported and does not permanently block progress.
-5. Completing a puzzle reveals its featured landmark and completed picture; awarded fragments never become unusable duplicates.
-6. The Journal shows completed photos, simplified shapes, fragments, and puzzles. Deleting sensitive media or route detail works as described in the privacy policy.
-7. The avatar follows the player; map rotation, north-up fallback, day/night palettes, XP bar, and primary navigation work without obscuring the walking route.
-8. Permission denial, noisy GPS, interruption, and offline synchronization do not fabricate progress or duplicate rewards.
-
-## 10. Decisions to validate in the pilot
-
-- Initial worldwide landmark-picture catalog size and how to replenish it as players complete puzzles.
-- Photo/route storage, synchronization, retention, and deletion policy.
-- Accessibility alternatives for players unable to complete a particular walking or photography task.
+4. Only curated landmarks receive photography prompts; other Anomalies use shape walking.
+5. The Journal shows completed photos, simplified shapes, fragments, and puzzles.
+6. The avatar follows the player.
