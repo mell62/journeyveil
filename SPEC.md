@@ -116,12 +116,14 @@ Maintain a curated global set of landmarks for photography challenges and collec
 | Area | Technology |
 |---|---|
 | Game and app UI | Godot GDScript for the map experience, challenges, Journal, puzzles, achievements, and profile. |
-| Avatar | Godot |
-| Geographic map | A tile-based map integration in Godot. |
+| Avatar | Animated 3D character in Godot, with idle/walking transitions through AnimationTree. |
+| Geographic map | Mapbox raster tiles rendered as textured ground tiles in Godot. Godot renders the tilted camera, avatar, concealed/revealed Cells, anomalies, and routes. |
 | World grid | H3 |
 | Android capabilities | A Kotlin Godot plugin for permissions, camera integration, authentication, and a foreground location service. |
 | Location | Android Fused Location Provider, with sampling adapted to movement and challenge state. |
 | Local persistence | SQLite for discoveries, challenge attempts, Journal metadata, and a sync queue. |
+
+The MVP ground map is flat: buildings and labels are baked into tile images, so there are no extruded buildings and labels tilt with the ground. Validate this appearance on an Android device before committing beyond the prototype. Implement geographic positioning, tile loading, and permitted caching; verify Mapbox pricing, custom-renderer and offline terms, and required attribution before release.
 
 ### Backend and infrastructure
 
