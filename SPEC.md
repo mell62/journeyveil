@@ -130,6 +130,6 @@ Maintain a curated global set of landmarks for photography challenges and collec
 | API | Go modular API. |
 | Database | PostgreSQL + PostGIS for player progression, challenge assignments, landmark catalog, and geographic queries. |
 | Authentication | Auth0, integrated through its Android SDK. |
-| Media | Cloudflare R2 for player photos and catalog images. |
+| Media | Cloudflare R2 |
 | Photo verification | An LLM API, called by the Go backend. |
 | Background jobs | Cloud Tasks → Go worker on Cloud Run. |
