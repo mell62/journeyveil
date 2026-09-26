@@ -84,7 +84,7 @@ Maintain a curated global set of landmarks for photography challenges and collec
 ### Main map
 
 - Tilted 3D perspective, a single default avatar at the player's position, and a map that follows movement.
-- The map rotates with device heading when heading quality is usable; provide a north-up control and a stable fallback when compass data is noisy.
+- The map rotates with device heading.
 - Day and night map palettes follow local time. Revealed and unexplored Cells must remain distinguishable in both palettes.
 - A corner profile displays character portrait, level, and XP bar. Primary navigation provides **Journal**, **Achievements**, and **Statistics**.
 - Anomalies and challenge states have distinct, readable map markers.
@@ -93,7 +93,7 @@ Maintain a curated global set of landmarks for photography challenges and collec
 
 - A chronological discovery feed alongside collections for **Photos**, **Walked Shapes**, **Map Fragments**, and **Completed Puzzles**.
 - Entries show date, approximate location, challenge, and reward. Photo entries show the player's photograph; shape entries show a simplified route rather than requiring raw location history.
-- Players can view and delete their own photos and detailed route data. Journal entries remain legible if associated media is removed.
+- Players can view their own photos and detailed route data.
 
 ### Achievements and statistics
 
