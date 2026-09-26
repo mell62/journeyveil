@@ -8,7 +8,7 @@
 
 Journeyveil turns real-world walking into the discovery of a hidden map. Players reveal previously unexplored hexagonal **Cells**, encounter **Anomalies**, complete photography or shape-walking challenges, and collect **Map Fragments**. Completed fragment puzzles reveal collectible pictures of landmarks around the world. A personal Journal preserves discoveries, photographs, walked shapes, and puzzles.
 
-The primary experience is a tilted, third-person, avatar-centered 3D map. This is **not camera-based augmented reality**: the character is shown on a map that follows the player's location and rotates with their heading.
+The primary experience is a tilted, third-person, avatar-centered 3D map. The character is shown on a map that follows the player's location and rotates with their heading.
 
 ## 2. Goals and boundaries
 
@@ -25,7 +25,6 @@ The primary experience is a tilted, third-person, avatar-centered 3D map. This i
 - Android foreground and background exploration. iOS behavior is out of scope for the first release.
 - Exploration and challenges should work wherever location and map data support them. The landmark-picture catalog is global and independent of the player's location.
 - Photography prompts target stable, identifiable subjects (such as monuments or viewpoints). Sunset and weather-dependent prompts are deferred or optional, never the sole way to finish an Anomaly.
-- No AR camera overlay. The camera is used only to take challenge photographs.
 
 ## 3. World and progression
 
@@ -33,8 +32,8 @@ The primary experience is a tilted, third-person, avatar-centered 3D map. This i
 
 - The world is divided into stable hexagonal Cells. Each Cell has an ID, geographic boundary, and exploration state for each player.
 - All Cells start **unexplored** for a new player. The map conceals unexplored terrain and reveals Cells as the player walks through them.
-- Cells are about 500 m across. Discover one after two GPS readings inside it, at least 10 seconds apart and accurate to 25 m. Require a third reading near boundaries. No manual reveals or imported history.
-- The first valid discovery of a Cell grants **base XP once**. Revisits do not grant discovery XP again.
+- Cells are about 500 m across. Discover one after two GPS readings inside it, at least 10 seconds apart and accurate to 25 m. Require a third reading near boundaries.
+- The first valid discovery of a Cell grants **base XP once**.
 - Field-test Cell size and GPS tolerance so shape walks fit and GPS drift does not reveal extra Cells.
 
 ### Anomalies
@@ -48,7 +47,7 @@ The primary experience is a tilted, third-person, avatar-centered 3D map. This i
 
 - Start with 10 XP for discovering a Cell and 50 XP plus one Map Fragment for completing an Anomaly. Reaching level 2 takes 100 XP; each subsequent level requires 50 XP more than the previous one.
 - The reward screen distinguishes discovery XP from challenge XP. The profile corner shows the character portrait, current level, and progress to the next level.
-- Tune XP, levels, and Anomaly frequency using pilot walks and completion rates; these defaults are not permanent product promises.
+- Tune XP, levels, and Anomaly frequency using pilot walks and completion rates.
 - Rewards are issued once per player and event, including after retries, restarts, or delayed background synchronization.
 
 ## 4. Challenges
@@ -71,7 +70,7 @@ The primary experience is a tilted, third-person, avatar-centered 3D map. This i
 
 ## 5. Landmark catalog
 
-Maintain a curated global set of landmarks for photography challenges and collectible pictures. Each photography landmark has an approved public viewpoint.
+Maintain a curated global set of landmarks for photography challenges and collectible pictures.
 
 ## 6. Map Fragments and landmark pictures
 
@@ -80,7 +79,6 @@ Maintain a curated global set of landmarks for photography challenges and collec
 - The collection view shows fragment slots and completion progress without revealing the landmark picture too early.
 - Completing the puzzle reveals the landmark's name and location. The completed picture remains available in the Journal.
 - Fragment awards must advance a puzzle rather than become duplicates. Once a puzzle is complete, subsequent awards advance another available puzzle.
-- Featured landmarks must be verified as real and suitable to show publicly. A reveal is not a navigation instruction or assurance of current access.
 
 ## 7. Journal and interface
 
@@ -110,12 +108,3 @@ Maintain a curated global set of landmarks for photography challenges and collec
 - If tracking pauses, show that state clearly. Do not invent walked Cells, route segments, or challenge progress for a period without trustworthy readings.
 - Batch and deduplicate discoveries when connectivity returns. A completed action must not grant XP or fragments twice.
 - Minimize battery usage by adapting location sampling to movement and challenge state rather than continuously requesting maximum-accuracy GPS.
-
-## 9. MVP
-
-1. A new account sees unexplored Cells; a valid outdoor walk reveals them and awards discovery XP once each.
-2. With background exploration enabled, Android continues recording eligible discoveries while the game is not foregrounded, displays a persistent notification, and stops when the player chooses Stop.
-3. Discovering an Anomaly reveals the appropriate challenge. A successful photo or shape awards bonus XP and one fragment exactly once.
-4. Only curated landmarks receive photography prompts; other Anomalies use shape walking.
-5. The Journal shows completed photos, simplified shapes, fragments, and puzzles.
-6. The avatar follows the player.
