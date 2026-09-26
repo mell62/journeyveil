@@ -79,7 +79,7 @@ Maintain a curated global set of landmarks for photography challenges and collec
 - A puzzle represents a landmark anywhere in the world; its fragments form a collectible jigsaw-style picture.
 - The collection view shows fragment slots and completion progress without revealing the landmark picture too early.
 - Completing the puzzle reveals the landmark's name and location. The completed picture remains available in the Journal.
-- Fragment awards must advance a puzzle rather than become unusable duplicates. Once a puzzle is complete, subsequent awards advance another available puzzle; if the catalog is exhausted, the game must offer a defined alternative reward before enabling more Anomalies.
+- Fragment awards must advance a puzzle rather than become duplicates. Once a puzzle is complete, subsequent awards advance another available puzzle.
 - Featured landmarks must be verified as real and suitable to show publicly. A reveal is not a navigation instruction or assurance of current access.
 
 ## 7. Journal and interface
