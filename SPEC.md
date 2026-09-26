@@ -33,22 +33,22 @@ The primary experience is a tilted, third-person, avatar-centered 3D map. This i
 
 - The world is divided into stable hexagonal Cells. Each Cell has an ID, geographic boundary, and exploration state for each player.
 - All Cells start **unexplored** for a new player. The map conceals unexplored terrain and reveals Cells as the player walks through them.
-- A Cell becomes **discovered** only after sufficiently reliable location readings place the player inside it. No manual tap-to-reveal or retroactive import of location history.
+- Cells are about 500 m across. Discover one after two GPS readings inside it, at least 10 seconds apart and accurate to 25 m. Require a third reading near boundaries. No manual reveals or imported history.
 - The first valid discovery of a Cell grants **base XP once**. Revisits do not grant discovery XP again.
-- Hex size and GPS tolerance must be tuned together in outdoor testing: the Cell must be large enough to support useful walks and shape challenges without location noise repeatedly moving a player between Cells.
+- Field-test Cell size and GPS tolerance so shape walks fit and GPS drift does not reveal extra Cells.
 
 ### Anomalies
 
-- Some Cells contain a discoverable Anomaly. Its presence is revealed when the player discovers the Cell, not while it remains unexplored.
+- Roughly one in four Cells contains a discoverable Anomaly. Its presence is revealed when the player discovers the Cell, not while it remains unexplored.
 - An Anomaly has one challenge and three player-facing states: **available**, **in progress**, and **completed**. A failed or interrupted attempt returns it to available; a completed Anomaly cannot award its reward again.
 - In an eligible scenic Cell, the Anomaly offers a photography challenge. Otherwise it offers a shape-walking challenge. A photography challenge that is inaccessible, unsafe, or cannot be verified must have a non-photography fallback; it must not permanently strand the player's reward.
 - Anomalies are assigned consistently so revisiting a Cell does not reroll its challenge or rewards.
 
 ### XP
 
-- Discovering a Cell grants a small amount of XP. Completing an Anomaly grants a substantially larger bonus and one Map Fragment.
+- Start with 10 XP for discovering a Cell and 50 XP plus one Map Fragment for completing an Anomaly. Reaching level 2 takes 100 XP; each subsequent level requires 50 XP more than the previous one.
 - The reward screen distinguishes discovery XP from challenge XP. The profile corner shows the character portrait, current level, and progress to the next level.
-- Exact XP amounts, level curve, Anomaly frequency, and fragment counts are balancing parameters to settle during playtesting, not hard-coded product promises.
+- Tune XP, levels, and Anomaly frequency using pilot walks and completion rates; these defaults are not permanent product promises.
 - Rewards are issued once per player and event, including after retries, restarts, or delayed background synchronization.
 
 ## 4. Challenges
@@ -56,22 +56,18 @@ The primary experience is a tilted, third-person, avatar-centered 3D map. This i
 ### Photography
 
 1. A scenic Anomaly presents a specific, observable subject and clear instructions (for example, “Photograph the old lighthouse”).
-2. The player takes a photo in the game while near the Anomaly's eligible public location.
-3. The game checks capture time and location eligibility, then analyzes whether the requested subject appears in the image. **Beauty or photographic quality is not a pass condition.**
+2. The player takes a photo in the game within 100 m of an approved public viewpoint.
+3. The photo passes if its capture time and location are valid and the requested subject is visible. Uncertain matches can be retried.
 4. On success, the player receives bonus XP and a Map Fragment; the photo and challenge result appear in the Journal.
 5. On failure, the player receives a useful reason and can retry or choose the fallback where available. An uncertain AI result must not be presented as a confident rejection.
-
-Image analysis is only one signal: it cannot prove where an image was taken, and GPS alone cannot prove what a camera could see. Define review thresholds, retry behavior, and abuse controls before release. Do not require players to photograph strangers, enter private property, or cross unsafe terrain.
 
 ### Shape walking
 
 1. A non-scenic Anomaly asks the player to walk an approximate **triangle** or **square** in its Cell.
 2. The game shows the target shape, starts recording when the player chooses **Start**, and renders their route on the map.
-3. On **Finish**, the route is checked for a minimum meaningful distance, a closed loop, the requested number of turns, and approximate similarity to the target. GPS drift, reasonable detours, and imperfect angles are tolerated.
+3. On **Finish**, accept a route of at least 200 m that ends within 40 m of its start, with three or four clear turns and sides no more than twice as long as each other. Allow for GPS noise and detours.
 4. On success, the player receives bonus XP and a Map Fragment; a simplified route sketch and result appear in the Journal.
 5. An interruption can pause or end the attempt without losing previously earned rewards. Unreliable tracking produces an inconclusive attempt rather than a false failure.
-
-Shape walking must not encourage road crossing, trespassing, or staring at the screen while moving. Test whether a shape can realistically be walked on public routes within the chosen Cell size; provide a way to report unsafe or impractical challenges. Do not assume a mathematically perfect shape is possible on local streets.
 
 ## 5. Scenic-place selection
 
@@ -142,8 +138,5 @@ Location data coverage and access rules vary by region. Use shape-walking challe
 ## 10. Decisions to validate in the pilot
 
 - Initial worldwide landmark-picture catalog size and how to replenish it as players complete puzzles.
-- Hex size, discovery accuracy/dwell rules, Anomaly density, and XP/level progression.
-- Shape-scoring tolerance and whether local public routes support triangle and square challenges inside a Cell.
-- Photography eligibility radius, subject-verification threshold, fallback policy, and validation costs.
 - Photo/route storage, synchronization, retention, and deletion policy.
 - Accessibility alternatives for players unable to complete a particular walking or photography task.
