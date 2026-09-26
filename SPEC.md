@@ -108,3 +108,28 @@ Maintain a curated global set of landmarks for photography challenges and collec
 - If tracking pauses, show that state clearly. Do not invent walked Cells, route segments, or challenge progress for a period without trustworthy readings.
 - Batch and deduplicate discoveries when connectivity returns. A completed action must not grant XP or fragments twice.
 - Minimize battery usage by adapting location sampling to movement and challenge state rather than continuously requesting maximum-accuracy GPS.
+
+## 9. Tech stack
+
+### Client
+
+| Area | Technology and responsibility |
+|---|---|
+| Game and app UI | **Godot 4 + GDScript** for the map experience, challenges, Journal, puzzles, achievements, and profile. |
+| Avatar | **Blender → GLB/glTF**, with rigged idle and walking clips blended through Godot's **AnimationTree**. |
+| Geographic map | A **tile-based map integration in Godot**. The map provider and renderer remain unselected pending a real-device prototype; a native map SDK is not a drop-in Godot renderer. |
+| World grid | **H3**, with compatible bindings verified for Godot/Android and Go. |
+| Android capabilities | A **Kotlin Godot plugin** for permissions, camera integration, authentication, and a foreground location service. |
+| Location | **Android Fused Location Provider**, with sampling adapted to movement and challenge state. |
+| Local persistence | **SQLite** for discoveries, challenge attempts, Journal metadata, and a durable synchronization queue. |
+
+### Backend and infrastructure
+
+| Area | Technology and responsibility |
+|---|---|
+| API | **Go**, using **net/http + chi**, deployed as a modular API. |
+| Database | **Managed PostgreSQL + PostGIS** for player progression, stable challenge assignments, the landmark catalog, and geographic queries. |
+| Authentication | **Auth0**, integrated through its Android SDK in the Kotlin plugin using system-browser login and Authorization Code + PKCE. |
+| Media | **Private S3-compatible object storage** for player photos and catalog images. |
+| Photo verification | An **LLM API**, called only by the Go backend. |
+| Background jobs | **Google Cloud Tasks** delivers authenticated HTTP requests to a private **Cloud Run Go worker** for photo verification and other asynchronous server work. Handlers must tolerate duplicate deliveries. |
