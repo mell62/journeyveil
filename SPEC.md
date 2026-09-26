@@ -6,7 +6,7 @@
 
 ## 1. Premise
 
-Journeyveil turns real-world walking into the discovery of a hidden map. Players reveal previously unexplored hexagonal **Cells**, encounter **Anomalies**, complete photography or shape-walking challenges, and collect **Map Fragments**. Completed fragment puzzles reveal remarkable destinations. A personal Journal preserves discoveries, photographs, walked shapes, and puzzles.
+Journeyveil turns real-world walking into the discovery of a hidden map. Players reveal previously unexplored hexagonal **Cells**, encounter **Anomalies**, complete photography or shape-walking challenges, and collect **Map Fragments**. Completed fragment puzzles reveal collectible pictures of landmarks around the world. A personal Journal preserves discoveries, photographs, walked shapes, and puzzles.
 
 The primary experience is a tilted, third-person, avatar-centered 3D map. This is **not camera-based augmented reality**: the character is shown on a map that follows the player's location and rotates with their heading.
 
@@ -16,14 +16,14 @@ The primary experience is a tilted, third-person, avatar-centered 3D map. This i
 
 - Make an ordinary walk feel like progress and discovery.
 - Offer a rewarding challenge when an Anomaly is found, without requiring a scenic landmark in every neighborhood.
-- Give collected fragments a clear purpose: revealing an interesting place in the player's country.
+- Give collected fragments a clear purpose: completing collectible pictures of landmarks around the world.
 - Make past walks worth revisiting through an attractive, private Journal.
 
 ### MVP boundaries
 
 - One default character; no character customization, combat, social features, or trading.
 - Android foreground and background exploration. iOS behavior is out of scope for the first release.
-- Launch in a defined supported country or region with a destination-puzzle catalog. The map and Cell system should not assume that geography is the permanent limit; expand content coverage after the pilot.
+- Exploration and challenges should work wherever location and map data support them. The landmark-picture catalog is global and independent of the player's location.
 - Photography prompts target stable, identifiable subjects (such as monuments or viewpoints). Sunset and weather-dependent prompts are deferred or optional, never the sole way to finish an Anomaly.
 - No AR camera overlay. The camera is used only to take challenge photographs.
 
@@ -82,20 +82,20 @@ Journeyveil does **not** manually inspect every Cell or classify every location 
 - Generate a specific photography prompt only above a conservative confidence threshold. A missing or low-confidence candidate produces a shape-walking Anomaly instead.
 - Check that the player can reach an eligible public position; a POI coordinate alone does not guarantee visibility, access, or safety.
 - Provide player reports for missing subjects, inaccessible locations, inaccurate prompts, and unsafe routes. Use reports and challenge outcomes to retire bad prompts and prioritize human review of popular candidates.
-- Curate or review the much smaller set of **featured puzzle destinations** for the launch region. Automated scenic scoring is a candidate generator, not a guarantee that a destination is worth recommending.
+- Curate or review the much smaller global set of **featured puzzle landmarks**. Automated scenic scoring is a candidate generator, not a guarantee that a landmark is worth featuring.
 
-Location data coverage and access rules vary by region. Expand supported content only when its quality meets the same bar.
+Location data coverage and access rules vary by region. Use shape-walking challenges where reliable photography prompts are unavailable.
 
-## 6. Map Fragments and destination puzzles
+## 6. Map Fragments and landmark pictures
 
-- Every completed Anomaly in the supported launch area awards one fragment for an active destination puzzle associated with that country.
-- A puzzle represents one notable destination; its fragments form a jigsaw-style image or illustrated map.
-- The collection view shows fragment slots and completion progress without revealing the destination too early.
-- Completing the puzzle reveals the destination's name and location and marks it on the map. The completed puzzle remains available in the Journal.
+- Every completed Anomaly awards one fragment for an active landmark puzzle, regardless of where the player is walking.
+- A puzzle represents a landmark anywhere in the world; its fragments form a collectible jigsaw-style picture.
+- The collection view shows fragment slots and completion progress without revealing the landmark picture too early.
+- Completing the puzzle reveals the landmark's name and location. The completed picture remains available in the Journal.
 - Fragment awards must advance a puzzle rather than become unusable duplicates. Once a puzzle is complete, subsequent awards advance another available puzzle; if the catalog is exhausted, the game must offer a defined alternative reward before enabling more Anomalies.
-- Featured destinations must be verified as real and suitable to show publicly. A reveal is an invitation to explore, not a navigation instruction or assurance of current access.
+- Featured landmarks must be verified as real and suitable to show publicly. A reveal is not a navigation instruction or assurance of current access.
 
-**Coverage decision before launch:** define the supported country/region and enough reviewed puzzles to sustain its expected Anomaly completions. Outside supported content coverage, exploration may still reveal Cells and award discovery XP, but the UI must not promise fragment-bearing Anomalies it cannot supply.
+**Catalog decision before launch:** provide enough reviewed landmark pictures to sustain expected Anomaly completions, or define the alternative reward when the catalog is exhausted.
 
 ## 7. Journal and interface
 
@@ -105,7 +105,7 @@ Location data coverage and access rules vary by region. Expand supported content
 - The map rotates with device heading when heading quality is usable; provide a north-up control and a stable fallback when compass data is noisy.
 - Day and night map palettes follow local time. Revealed and unexplored Cells must remain distinguishable in both palettes.
 - A corner profile displays character portrait, level, and XP bar. Primary navigation provides **Journal**, **Achievements**, and **Statistics**.
-- Anomalies, challenge state, and revealed destinations have distinct, readable map markers.
+- Anomalies and challenge states have distinct, readable map markers.
 
 ### Journal
 
@@ -134,14 +134,14 @@ Location data coverage and access rules vary by region. Expand supported content
 2. With background exploration enabled, Android continues recording eligible discoveries while the game is not foregrounded, displays a persistent notification, and stops when the player chooses Stop.
 3. Discovering an Anomaly reveals the appropriate challenge. A successful photo or shape awards bonus XP and one fragment exactly once.
 4. A low-confidence scenic location does not receive an invented photography prompt. A bad or unsafe prompt can be reported and does not permanently block progress.
-5. Completing a puzzle reveals and marks its featured destination; awarded fragments never become unusable duplicates.
+5. Completing a puzzle reveals its featured landmark and completed picture; awarded fragments never become unusable duplicates.
 6. The Journal shows completed photos, simplified shapes, fragments, and puzzles. Deleting sensitive media or route detail works as described in the privacy policy.
 7. The avatar follows the player; map rotation, north-up fallback, day/night palettes, XP bar, and primary navigation work without obscuring the walking route.
 8. Permission denial, noisy GPS, interruption, and offline synchronization do not fabricate progress or duplicate rewards.
 
 ## 10. Decisions to validate in the pilot
 
-- Supported launch geography and the initial destination catalog.
+- Initial worldwide landmark-picture catalog size and how to replenish it as players complete puzzles.
 - Hex size, discovery accuracy/dwell rules, Anomaly density, and XP/level progression.
 - Shape-scoring tolerance and whether local public routes support triangle and square challenges inside a Cell.
 - Photography eligibility radius, subject-verification threshold, fallback policy, and validation costs.
