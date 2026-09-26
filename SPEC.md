@@ -23,7 +23,6 @@ The primary experience is a tilted, third-person, avatar-centered 3D map. The ch
 
 - One default character; no character customization, combat, social features, or trading.
 - Android foreground and background exploration. iOS behavior is out of scope for the first release.
-- Exploration and challenges should work wherever location and map data support them. The landmark-picture catalog is global and independent of the player's location.
 - Photography prompts target stable, identifiable subjects (such as monuments or viewpoints). Sunset and weather-dependent prompts are deferred or optional, never the sole way to finish an Anomaly.
 
 ## 3. World and progression
