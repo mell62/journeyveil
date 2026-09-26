@@ -117,7 +117,7 @@ Maintain a curated global set of landmarks for photography challenges and collec
 |---|---|
 | Game and app UI | **Godot 4 + GDScript** for the map experience, challenges, Journal, puzzles, achievements, and profile. |
 | Avatar | **Blender → GLB/glTF**, with rigged idle and walking clips blended through Godot's **AnimationTree**. |
-| Geographic map | A **tile-based map integration in Godot**. The map provider and renderer remain unselected pending a real-device prototype; a native map SDK is not a drop-in Godot renderer. |
+| Geographic map | A **tile-based map integration in Godot**. |
 | World grid | **H3**, with compatible bindings verified for Godot/Android and Go. |
 | Android capabilities | A **Kotlin Godot plugin** for permissions, camera integration, authentication, and a foreground location service. |
 | Location | **Android Fused Location Provider**, with sampling adapted to movement and challenge state. |
@@ -128,8 +128,8 @@ Maintain a curated global set of landmarks for photography challenges and collec
 | Area | Technology and responsibility |
 |---|---|
 | API | Go modular API. |
-| Database | **PostgreSQL + PostGIS** for player progression, stable challenge assignments, the landmark catalog, and geographic queries. |
-| Authentication | **Auth0**, integrated through its Android SDK in the Kotlin plugin using system-browser login and Authorization Code + PKCE. |
+| Database | **PostgreSQL + PostGIS** for player progression, challenge assignments, landmark catalog, and geographic queries. |
+| Authentication | **Auth0**, integrated through its Android SDK. |
 | Media | **Private S3-compatible object storage** for player photos and catalog images. |
 | Photo verification | An **LLM API**, called only by the Go backend. |
-| Background jobs | **Google Cloud Tasks** delivers authenticated HTTP requests to a private **Cloud Run Go worker** for photo verification and other asynchronous server work. Handlers must tolerate duplicate deliveries. |
+| Background jobs | **Google Cloud Tasks** delivers authenticated HTTP requests to a private **Cloud Run Go worker** for photo verification and other asynchronous server work. Handlers tolerate duplicate deliveries. |
