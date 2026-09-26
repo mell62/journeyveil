@@ -55,7 +55,7 @@ The primary experience is a tilted, third-person, avatar-centered 3D map. The ch
 
 1. A photography Anomaly names a curated landmark to photograph (for example, “Photograph the old lighthouse”).
 2. The player takes a photo in the game within 100 m of an approved public viewpoint.
-3. The photo passes if its capture time and location are valid and the requested subject is visible. Uncertain matches can be retried.
+3. The photo passes if its capture time and location are valid and the requested subject is verified by AI. Uncertain matches can be retried.
 4. On success, the player receives bonus XP and a Map Fragment; the photo and challenge result appear in the Journal.
 5. On failure, the player can retry.
 
