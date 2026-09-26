@@ -44,7 +44,7 @@ The primary experience is a tilted, third-person, avatar-centered 3D map. The ch
 
 ### XP
 
-- Start with 10 XP for discovering a Cell and 50 XP plus one Map Fragment for completing an Anomaly. Reaching level 2 takes 100 XP; each subsequent level requires 50 XP more than the previous one.
+- Start with 10 XP for discovering a Cell and 50 XP plus one Map Fragment for completing an Anomaly. Reaching level 2 takes 50 XP; each subsequent level requires 50 XP more than the previous one.
 - The reward screen distinguishes discovery XP from challenge XP. The profile corner shows the character portrait, current level, and progress to the next level.
 - Tune XP, levels, and Anomaly frequency using pilot walks and completion rates.
 - Rewards are issued once per player and event, including after retries, restarts, or delayed background synchronization.
