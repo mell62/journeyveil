@@ -127,7 +127,7 @@ Maintain a curated global set of landmarks for photography challenges and collec
 
 | Area | Technology and responsibility |
 |---|---|
-| API | **Go**, using **net/http + chi**, deployed as a modular API. |
+| API | **Go** deployed as a modular API. |
 | Database | **Managed PostgreSQL + PostGIS** for player progression, stable challenge assignments, the landmark catalog, and geographic queries. |
 | Authentication | **Auth0**, integrated through its Android SDK in the Kotlin plugin using system-browser login and Authorization Code + PKCE. |
 | Media | **Private S3-compatible object storage** for player photos and catalog images. |
