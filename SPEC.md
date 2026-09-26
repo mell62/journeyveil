@@ -61,7 +61,7 @@ The primary experience is a tilted, third-person, avatar-centered 3D map. The ch
 
 ### Shape walking
 
-1. A shape-walking Anomaly asks the player to walk an approximate **triangle** or **square** or **alphabet letters** in its Cell.
+1. A shape-walking Anomaly asks the player to walk an approximate **triangle** or **square** or **alphabets** in its Cell.
 2. The game shows the target shape, starts recording when the player chooses **Start**, and renders their route on the map.
 3. On **Finish**, accept a route of at least 200 m that ends within 40 m of its start, with three or four clear turns and sides no more than twice as long as each other. Allow for GPS noise and detours.
 4. On success, the player receives bonus XP and a Map Fragment; a simplified route sketch and result appear in the Journal.
