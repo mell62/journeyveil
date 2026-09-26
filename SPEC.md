@@ -37,7 +37,7 @@ The primary experience is a tilted, third-person, avatar-centered 3D map. The ch
 
 ### Anomalies
 
-- Roughly one in four Cells contains a discoverable Anomaly. Its presence is revealed when the player discovers the Cell, not while it remains unexplored.
+- Roughly one in eight Cells contains a discoverable Anomaly. Its presence is revealed when the player discovers the Cell, not while it remains unexplored.
 - An Anomaly has one challenge and three player-facing states: **available**, **in progress**, and **completed**. A failed or interrupted attempt returns it to available; a completed Anomaly cannot award its reward again.
 - An Anomaly near a curated landmark offers a photography challenge; elsewhere it offers a shape-walking challenge.
 - Anomalies are assigned consistently so revisiting a Cell does not reroll its challenge or rewards.
