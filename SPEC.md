@@ -1,9 +1,5 @@
 # Journeyveil — Product Specification
 
-**Status:** Draft MVP specification  
-**Platforms:** Android first; iOS is a later phase  
-**Game type:** Location-based walking and exploration
-
 ## 1. Premise
 
 Journeyveil turns real-world walking into the discovery of a hidden map. Players reveal previously unexplored hexagonal **Cells**, encounter **Anomalies**, complete photography or shape-walking challenges, and collect **Map Fragments**. Completed fragment puzzles reveal collectible pictures of landmarks around the world. A personal Journal preserves discoveries, photographs, walked shapes, and puzzles.
@@ -130,7 +126,7 @@ The MVP ground map is flat: buildings and labels are baked into tile images, so 
 |---|---|
 | API | Go modular API. |
 | Database | PostgreSQL + PostGIS for player progression, challenge assignments, landmark catalog, and geographic queries. |
-| Authentication | Auth0, integrated through its Android SDK. |
+| Authentication | OAuth2 |
 | Media | Cloudflare R2 |
 | Photo verification | An LLM API, called by the Go backend. |
 | Background jobs | Cloud Tasks → Go worker on Cloud Run. |
