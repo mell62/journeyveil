@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"io"
+	"log/slog"
 	"net/http"
 	"testing"
 	"time"
@@ -13,7 +14,8 @@ import (
 )
 
 func TestHealthEndpoint(t *testing.T) {
-	server, err := api.NewServer("127.0.0.1:0", api.NewHandler())
+	logger := slog.New(slog.NewTextHandler(io.Discard, nil))
+	server, err := api.NewServer("127.0.0.1:0", api.NewHandler(logger))
 	if err != nil {
 		t.Fatalf("create server: %v", err)
 	}
@@ -23,6 +25,17 @@ func TestHealthEndpoint(t *testing.T) {
 	go func() {
 		done <- server.Run(ctx)
 	}()
+	t.Cleanup(func() {
+		cancel()
+		select {
+		case err := <-done:
+			if err != nil {
+				t.Errorf("stop server: %v", err)
+			}
+		case <-time.After(2 * time.Second):
+			t.Error("server did not stop after cancellation")
+		}
+	})
 
 	client := &http.Client{Timeout: time.Second}
 	response, err := client.Get("http://" + server.Addr() + "/healthz")
@@ -56,15 +69,6 @@ func TestHealthEndpoint(t *testing.T) {
 		t.Errorf("response has trailing JSON: %v", err)
 	}
 
-	cancel()
-	select {
-	case err := <-done:
-		if err != nil {
-			t.Fatalf("stop server: %v", err)
-		}
-	case <-time.After(2 * time.Second):
-		t.Fatal("server did not stop after cancellation")
-	}
 }
 
 func ensureEOF(decoder *json.Decoder) error {

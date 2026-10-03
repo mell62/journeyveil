@@ -2,15 +2,16 @@ package api
 
 import (
 	"io"
+	"log/slog"
 	"net/http"
 )
 
 // NewHandler constructs the Journeyveil HTTP API.
-func NewHandler() http.Handler {
+func NewHandler(logger *slog.Logger) http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /healthz", health)
 
-	return mux
+	return traceRequests(logger, mux)
 }
 
 func health(w http.ResponseWriter, _ *http.Request) {
